@@ -13,7 +13,7 @@ jobs:
     - name: Compile Somma.java
       run: javac Somma/src/Somma.java
     - name: Download Randoop
-      run: wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar 
+      run: wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -P Somma-prova
     - name: Generate Randoop tests
-      run: java -jar randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma-prova.Somma.src.Somma --timelimit=30
+      run: java -classpath Somma-prova/randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma-prova.Somma.src.Somma --timelimit=30
       shell: /usr/bin/bash {0}
