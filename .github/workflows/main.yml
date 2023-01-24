@@ -8,12 +8,10 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-    - name: Setup Java
-      uses: actions/setup-java@v2
-      with:
-        java-version: 17
-    - name: Install default-jdk
-      run: apt-get install -y default-jdk
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up JDK 1.8
+      run: sudo apt-get update && sudo apt-get install -y openjdk-8-jdk
     - name: Compile Somma.java
       run: javac Somma/src/Somma.java
     - name: Download Randoop
