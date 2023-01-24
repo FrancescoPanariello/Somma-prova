@@ -17,4 +17,4 @@ jobs:
     - name: Download Randoop
       run: wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar
     - name: Generate Randoop tests
-      run: java -classpath randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma.Somma --timelimit=60 
+      run: java -classpath randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma.Somma --timelimit=3m 
