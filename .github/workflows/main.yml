@@ -8,12 +8,12 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+    - name: Install default-jdk
+      run: apt-get install -y default-jdk
     - name: Setup Java
       uses: actions/setup-java@v2
       with:
         java-version: 14
-    - name: Install default-jdk
-      run: apt-get install -y default-jdk
     - name: Compile Somma.java
       run: javac Somma.java
     - name: Create Somma.jar
