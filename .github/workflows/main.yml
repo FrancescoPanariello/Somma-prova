@@ -15,6 +15,6 @@ jobs:
     - name: Compile Somma.java
       run: javac Somma/src/Somma.java
     - name: Download Randoop
-      run: wget https://randoop.github.io/randoop/releases/randoop-all-4.2.2.jar
+      run: wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar
     - name: Generate Randoop tests
       run: java -classpath Somma/src -jar randoop-all-4.2.2.jar --testclass=Somma.Somma --timelimit=60 --parallel-threads=4
