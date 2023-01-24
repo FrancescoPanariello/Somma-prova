@@ -12,7 +12,6 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: 14
-        distribution: adoptopenjdk
     - name: Install default-jdk
       run: apt-get install -y default-jdk
     - name: Compile Somma.java
