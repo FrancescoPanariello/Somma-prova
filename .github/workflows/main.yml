@@ -15,5 +15,5 @@ jobs:
     - name: Download Randoop
       run: wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -P Somma-prova
     - name: Generate Randoop tests
-      run: java -classpath Somma-prova/randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma-prova.Somma.src.Somma --timelimit=30
+      run: java -classpath Somma-prova/randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma-prova.Somma.out.production.Somma.Somma
       shell: /usr/bin/bash {0}
