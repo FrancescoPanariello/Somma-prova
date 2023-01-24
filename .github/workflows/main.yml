@@ -10,11 +10,11 @@ jobs:
       uses: actions/checkout@v2
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Set up JDK 1.8
+    - name: Set up JDK 19.0.1
       run: sudo apt-get update && sudo apt-get install -y openjdk-8-jdk
     - name: Compile Somma.java
       run: javac Somma/src/Somma.java
     - name: Download Randoop
       run: wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -P Somma-prova/Somma/out/production/Somma
     - name: Generate Randoop tests
-      run: java -classpath "Somma-prova/Somma/out/production/Somma;Somma-prova/Somma/out/production/Somma/randoop-all-4.3.2.jar" randoop.main.Main gentests -testclass=Somma
+      run: java -classpath Somma-prova/Somma/out/production/Somma;Somma-prova/Somma/out/production/Somma/randoop-all-4.3.2.jar randoop.main.Main gentests -testclass=Somma
