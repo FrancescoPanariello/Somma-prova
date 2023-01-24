@@ -11,7 +11,7 @@ jobs:
     - name: Setup Java
       uses: actions/setup-java@v2
       with:
-        java-version: 14
+        java-version: 17
     - name: Install default-jdk
       run: apt-get install -y default-jdk
     - name: Compile Somma.java
