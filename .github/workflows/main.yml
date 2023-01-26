@@ -4,20 +4,12 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
     - name: Set up JDK 19.0.1
-      run: |
-        if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
-          sudo apt-get update && sudo apt-get install -y openjdk-19-jdk
-        elif [ "${{ matrix.os }}" = "windows-latest" ]; then
-          choco install openjdk --version 19.0.1
-        fi
+      run: sudo apt-get update && sudo apt-get install -y openjdk-19-jdk
     - name: Compile Somma.java
       run: javac Somma/src/Somma.java
     - name: Download Randoop
