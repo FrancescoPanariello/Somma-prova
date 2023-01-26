@@ -17,4 +17,4 @@ jobs:
     - name: Osserva
       run: ls Somma/src && pwd    
     - name: Generate Randoop tests
-      run: java -cp "home/runner/work/Somma-prova/Somma-prova/Somma/src";"home/runner/work/Somma-prova/Somma-prova/Somma/srcrandoop-all-4.3.2.jar" randoop.main.Main gentests --testclass=Somma
+      run: java -cp "home/runner/work/Somma-prova/Somma-prova/Somma/src";"home/runner/work/Somma-prova/Somma-prova/Somma/srcrandoop-all-4.3.2.jar" randoop.main.Main --help
