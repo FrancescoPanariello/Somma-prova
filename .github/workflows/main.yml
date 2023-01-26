@@ -36,6 +36,7 @@ jobs:
     - name: Controllo
       run: |
             ls Prova
+            ls Prova/classes
             ls
             cat Prova/coverage.em
     - name: Upload Emma reports
