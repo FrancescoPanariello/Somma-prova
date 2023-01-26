@@ -28,6 +28,6 @@ jobs:
     - name: Unzip Emma
       run: unzip Somma/src/emma-2.0.5312.zip
     - name: Controllo
-      run: ls Somma/src/emma-2.0.5312 
+      run: ls Somma/src
     - name: Generate Randoop tests
       run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma
