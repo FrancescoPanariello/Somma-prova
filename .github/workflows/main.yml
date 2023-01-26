@@ -19,6 +19,7 @@ jobs:
           choco install openjdk --version 19.0.1
         elif [ "${{ matrix.os }}" = "macos-latest" ]; then
           brew install openjdk@19
+        fi
     - name: Compile Somma.java
       run: javac Somma/src/Somma.java
     - name: Download Randoop
