@@ -13,7 +13,7 @@ jobs:
     - name: Compile Somma.java
       run: javac Somma/src/Somma.java
     - name: Download Randoop
-      run: wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -P Somma-prova/src
+      run: wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -P Somma/src
     - name: Osserva
       run: ls
     - name: Osserva Somma
