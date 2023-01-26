@@ -17,10 +17,7 @@ jobs:
     - name: Generate Randoop tests
       run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma --output-limit=100
     - name: Upload
-      uses: actions/upload-artifact@v2
-      with:
-        name: Randoop artifacts
-        path: /home/runner/work/Somma-prova/Somma-prova/Somma/src/
+      run:
           git add .
           git commit -m "Aggiungi file generati"
           git push origin main
