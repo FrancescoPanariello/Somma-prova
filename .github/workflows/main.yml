@@ -27,8 +27,8 @@ jobs:
             wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -P Somma/src
     - name: Unzip Emma
       run: unzip Somma/src/emma-2.0.5312.zip -d Somma/src
-    - name: Controllo
-      run: ls Somma/src/emma-2.0.5312
+    - name: Inizializza Emma
+      run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -h
     - name: Generate Randoop tests with Emma
       run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src:/home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma --output-limit=200
     - name: Emma report
