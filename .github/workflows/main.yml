@@ -23,6 +23,12 @@ jobs:
     - name: Compile Somma.java
       run: javac Somma/src/Somma.java
     - name: Download Randoop
-      run: wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -P Somma/src 
+      run: |
+            wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -P Somma/src
+            wget https://sourceforge.net/projects/emma/files/emma-release/2.0.5312/emma-2.0.5312.zip/download -P Somma/src
+    - name: Unzip Emma
+      run: unzip emma-2.0.5312.zip
+    - name: Controllo
+      run: ls Somma/src/emma-2.0.5312 
     - name: Generate Randoop tests
       run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma
