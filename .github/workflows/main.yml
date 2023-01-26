@@ -20,5 +20,5 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Randoop artifacts
-        path: Prova
+        path: /home/runner/work/Somma-prova/Somma-prova/Somma/src/
 
