@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: windows
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -15,9 +15,6 @@ jobs:
     - name: Download Randoop
       run: wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -P Somma/src
     - name: Osserva
-      run: ls Somma/src && pwd
-    - name: Java
-      run: java --version
-    
+      run: ls Somma/src && pwd    
     - name: Generate Randoop tests
       run: java -cp "home/runner/work/Somma-prova/Somma-prova/Somma/src";"home/runner/work/Somma-prova/Somma-prova/Somma/srcrandoop-all-4.3.2.jar" randoop.main.Main gentests --testclass=Somma
