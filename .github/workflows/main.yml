@@ -15,4 +15,11 @@ jobs:
     - name: Download Randoop
       run: wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -P Somma/src 
     - name: Generate Randoop tests
-      run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma
+      run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma --output-limit=100
+    - name: Commit and Push
+      run: |
+        git config --local user.email "giovanni.riccardi3@studenti.unina.it"
+        git config --local user.name "Giovannircc"
+        git add .
+        git commit -m "Aggiungi file generati"
+        git push origin main
