@@ -24,9 +24,9 @@ jobs:
       run: javac Somma/src/Somma.java
     - name: Download Randoop
       run: |
-            wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -d Somma/src
+            wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -P Somma/src
     - name: Unzip Emma
-      run: unzip Somma/src/emma-2.0.5312.zip -P Somma/src
+      run: unzip Somma/src/emma-2.0.5312.zip -d Somma/src
     - name: Controllo
       run: ls Somma/src
     - name: Generate Randoop tests
