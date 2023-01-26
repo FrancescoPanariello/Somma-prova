@@ -15,7 +15,7 @@ jobs:
     - name: Download Randoop
       run: wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -P Somma/src
     - name: Osserva
-      run: ls Somma/src && Get-Location
+      run: ls Somma/src && pwd
     
     - name: Generate Randoop tests
       run: java -classpath Somma/src;randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma
