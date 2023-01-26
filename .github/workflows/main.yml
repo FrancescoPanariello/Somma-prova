@@ -21,4 +21,7 @@ jobs:
       with:
         name: Randoop artifacts
         path: /home/runner/work/Somma-prova/Somma-prova/Somma/src/
+          git add .
+          git commit -m "Aggiungi file generati"
+          git push origin main
 
