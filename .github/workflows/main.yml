@@ -17,7 +17,7 @@ jobs:
     - name: Osserva Somma
       run: cd Somma && ls
     - name: Download Randoop
-      run: wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -P Somma-prova
+      run: wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar
     - name: Generate Randoop tests
       run: java -classpath Somma-prova;Somma-prova/randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma.src.Somma
       shell: /usr/bin/bash {0}
