@@ -19,6 +19,6 @@ jobs:
     - name: Upload
       run:
           git add .
-          git commit -m "Aggiungi file generati"
+          git commit "Aggiungi file generati"
           git push origin main
 
