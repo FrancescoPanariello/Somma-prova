@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest]
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -17,8 +17,6 @@ jobs:
           sudo apt-get update && sudo apt-get install -y openjdk-19-jdk
         elif [ "${{ matrix.os }}" = "windows-latest" ]; then
           choco install openjdk --version 19.0.1
-        elif [ "${{ matrix.os }}" = "macos-latest" ]; then
-          brew install openjdk@19
         fi
     - name: Compile Somma.java
       run: javac Somma/src/Somma.java
