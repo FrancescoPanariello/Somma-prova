@@ -1,0 +1,26 @@
+name: Java Test Generation
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Set up JDK 19.0.1
+      run: sudo apt-get update && sudo apt-get install -y openjdk-19-jdk
+    - name: Compile Somma.java
+      run: javac Somma/src/Somma.java
+    - name: Download Randoop
+      run: wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -P Somma/src 
+    - name: Generate Randoop tests
+      run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+    - name: Run tests with Maven
+      run: mvn -B test --file pom.xml
