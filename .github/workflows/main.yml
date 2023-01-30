@@ -40,7 +40,7 @@ jobs:
             ls Prova
             ls Prova/classes
             ls
-            cat Prova/coverage.txt
+            #cat Prova/coverage.txt
     - name: Upload Emma reports
       uses: actions/upload-artifact@v2
       with:
