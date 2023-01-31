@@ -19,10 +19,12 @@ jobs:
         java-version: 14
 
     - name: Download Randoop
-      run: wget https://github.com/randoop/randoop/releases/download/v4.2.1/randoop-all-4.2.1.jar
+      run: |
+            wget https://github.com/randoop/randoop/releases/download/v4.3.2/randoop-all-4.3.2.jar -P Somma/src
 
     - name: Generate Tests with Randoop
-      run: java -classpath randoop-all-4.2.1.jar randoop.main.Main gentests --testclass=Somma --timelimit=30
+      run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma
+      #run: java -classpath randoop-all-4.2.1.jar randoop.main.Main gentests --testclass=Somma --timelimit=30
 
     - name: Build with Maven
       run: mvn clean verify
