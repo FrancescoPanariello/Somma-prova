@@ -37,7 +37,7 @@ jobs:
       run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r txt -Dreport.txt.out.file=Prova/coverage.txt -in Prova/coverage.em,Prova/coverage.ec
     #- name: Emma merge
      # run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in Prova/coverage.em,Prova/coverage.ec -out Prova/coverage.es
-    - name: Controllo
+   # - name: Controllo
       #run: |
        #     ls Prova
         #    ls Prova/classes
