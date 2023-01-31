@@ -29,7 +29,7 @@ jobs:
       run: javac Somma/src/Somma.java
       
     - name: Generate Randoop tests
-      run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma
+      run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-4.3.2.jar randoop.main.Main gentests --testclass=Somma --output-limit=200
  
  #run: java -classpath randoop-all-4.2.1.jar randoop.main.Main gentests --testclass=Somma --timelimit=30
 
