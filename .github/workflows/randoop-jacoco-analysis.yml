@@ -1,0 +1,37 @@
+name: Randoop and JaCoCo Analysis
+
+on: [push]
+
+env:
+  MAVEN_OPTS: "-Xmx1024m"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: 14
+
+    - name: Download Randoop
+      run: wget https://github.com/randoop/randoop/releases/download/v4.2.1/randoop-all-4.2.1.jar
+
+    - name: Generate Tests with Randoop
+      run: java -classpath randoop-all-4.2.1.jar randoop.main.Main gentests --testclass=Somma --timelimit=30
+
+    - name: Build with Maven
+      run: mvn clean verify
+
+    - name: Publish JaCoCo Coverage Report
+      uses: codecov/codecov-action@v1
+      with:
+        fail_ci: false
+        flags: unittests
+        file: target/site/jacoco/jacoco.xml
+        name: codecov
+        token: ${{ secrets.CODECOV_TOKEN }}
