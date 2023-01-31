@@ -44,6 +44,12 @@ jobs:
             ls Prova
             ls Prova/classes
             ls
+            ls /home
+            ls /home/runner
+            ls /home/runner/work
+            ls /home/runner/work/Somma-prova
+            ls  /home/runner/work/Somma-prova/Somma-prova
+            ls /home/runner/work/Somma-prova/Somma-prova/Somma
             #cat Prova/coverage.txt
     - name: Upload Emma reports
       uses: actions/upload-artifact@v2
