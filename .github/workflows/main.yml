@@ -19,7 +19,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
     - name: Set up JDK 19.0.1
-      run: sudo apt-get update && sudo apt-get install -y openjdk-19-jdk
+      #run: sudo apt-get update && sudo apt-get install -y openjdk-19-jdk
+      run: sudo yum install java-1.8.0-openjdk
     - name: Compile Somma.java
       run: javac Somma/src/Somma.java
     - name: Download Randoop
