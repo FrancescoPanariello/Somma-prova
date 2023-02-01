@@ -23,7 +23,7 @@ jobs:
       run: |
             sudo apt-get install openjdk-8-jdk
             java -version
-            sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0_version/bin/java
+            #sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0_version/bin/java
     - name: Compile Somma.java
       run: javac Somma/src/Somma.java
     - name: Download Randoop
