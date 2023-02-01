@@ -20,7 +20,9 @@ jobs:
       uses: actions/checkout@v2
     - name: Set up JDK 19.0.1
       #run: sudo apt-get update && sudo apt-get install -y openjdk-19-jdk
-      run: sudo yum install java-1.8.0-openjdk
+      run: |
+            wget https://javadl.oracle.com/webapps/download/AutoDL?BundleId=247936_0ae14417abb444ebb02b9815e2103550
+            tar zxvf jre-8u73-linux-x64.tar.gz
     - name: Compile Somma.java
       run: javac Somma/src/Somma.java
     - name: Download Randoop
