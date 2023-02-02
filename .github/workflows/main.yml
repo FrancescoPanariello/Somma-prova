@@ -55,6 +55,7 @@ jobs:
             ls Prova/classes
             echo "Prova"
             ls Prova
+            ls
 
     - name: Upload Emma reports
       uses: actions/upload-artifact@v2
