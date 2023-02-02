@@ -39,7 +39,7 @@ jobs:
       #run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m overwrite -d Prova -cp /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix Prova/coverage.txt -out Prova/coverage.em
       run: |
             #!/bin/bash
-            timestamp="$(date +"%H_%M:_%S")"
+            timestamp="$(date +"%H_%M_%S")"
             java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d Prova -ip /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix @Somma/src/myfilters.txt -out Prova/coverage_$timestamp.em
             #java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src:/home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/Somma/src/ripper.jar ripper.RipperApplicationTest Somma.class 1 1 0 4
     - name: Generate Randoop tests with Emma
