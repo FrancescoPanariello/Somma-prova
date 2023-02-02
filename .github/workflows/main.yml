@@ -43,8 +43,9 @@ jobs:
             timestamp=${{ matrix.ci_node_index }}
 
             #Instr emma
-            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d Prova -ip /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp -ix @Somma/src/myfilters.txt -out /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.em
-            ls  /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/classes
+            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d Prova -ip /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix @Somma/src/myfilters.txt -out /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.em
+
+            
             #Randoop
             java -noverify -classpath /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/classes:/home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-3.0.6.jar randoop.main.Main gentests --classlist=Somma/src/lista.txt --timelimit=20 --junit-output-dir=Prova
             
