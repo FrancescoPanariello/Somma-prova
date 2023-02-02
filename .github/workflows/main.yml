@@ -51,17 +51,11 @@ jobs:
     #  run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in Prova/coverage.em,Prova/coverage.ec -out Prova/coverage.es
     - name: Controllo
       run: |
-            ls Somma/src
-            ls Prova
+            echo "classes"
             ls Prova/classes
-            ls
-            ls /home
-            ls /home/runner
-            ls /home/runner/work
-            ls /home/runner/work/Somma-prova
-            ls  /home/runner/work/Somma-prova/Somma-prova
-            ls /home/runner/work/Somma-prova/Somma-prova/Somma
-            #cat Prova/coverage.txt
+            echo "Prova"
+            ls Prova
+
     - name: Upload Emma reports
       uses: actions/upload-artifact@v2
       with:
