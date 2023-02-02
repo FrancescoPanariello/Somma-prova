@@ -32,7 +32,7 @@ jobs:
       run: javac Somma/src/Somma.java
     - name: Download Randoop
       run: |
-            wget https://github.com/randoop/randoop/releases/download/v3.0.6/randoop-all-3.0.6.jar -P Somma/src
+            wget https://github.com/randoop/randoop/releases/download/v3.0.6/randoop-all-3.0.6.jar -P /src
     - name: Unzip Emma
       run: unzip Somma/src/emma-2.0.5312.zip -d Somma/src
     - name: Run emma e randoop
@@ -43,16 +43,16 @@ jobs:
             timestamp=${{ matrix.ci_node_index }}
             echo "prova $timestamp"
             #Instr emma
-            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d Prova -ip /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix @Somma/src/myfilters.txt -out Prova/coverage_$timestamp.em
+            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d Prova -ip /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp -ix @Somma/src/myfilters.txt -out /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.em
             
             #Randoop
-            java -noverify -classpath /home/runner/work/Somma-prova/Somma-prova/Prova/classes:/home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-3.0.6.jar randoop.main.Main gentests --classlist=Somma/src/lista.txt --timelimit=20 --junit-output-dir=Prova
+            java -noverify -classpath /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/classes:/home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-3.0.6.jar randoop.main.Main gentests --classlist=Somma/src/lista.txt --timelimit=20 --junit-output-dir=Prova
             
-            cp coverage.ec Prova/coverage_$timestamp.ec
+            cp coverage.ec /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.ec
             rm coverage.ec
             
             #Emma report
-            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -Dreport.html.out.file=/home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.html  -in Prova/coverage_$timestamp.em,Prova/coverage_$timestamp.ec
+            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -Dreport.html.out.file=/home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.html  -in /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.em,/home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.ec
    # - name: Emma merge
     #  run: |
      #       if [ ls Prova/coverage.ec];
@@ -64,9 +64,9 @@ jobs:
     - name: Controllo
       run: |
             echo "classes"
-            ls Prova/classes
+            ls /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/classes
             echo "Prova"
-            ls Prova
+            ls /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/
             ls
 
     - name: Upload Emma reports
