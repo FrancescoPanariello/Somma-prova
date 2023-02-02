@@ -3,9 +3,7 @@ public class Somma{
         if(a==b)
             return 2*a;
         if(a==450*b)
-            return a/450
-        if(a==2.5)
-            return a
+            return a/450;
         return a+b;
     }
     
