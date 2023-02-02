@@ -38,17 +38,18 @@ jobs:
     - name: Inizializza Emma
       #run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m overwrite -d Prova -cp /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix Prova/coverage.txt -out Prova/coverage.em
       run: |
-            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d Prova -ip /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix @Somma/src/myfilters.txt -out Prova/coverage.em
+            #!/bin/bash
+            timestamp="$(date +"%H_%M:_%S")"
+            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d Prova -ip /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix @Somma/src/myfilters.txt -out Prova/coverage_$timestamp.em
             #java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src:/home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/Somma/src/ripper.jar ripper.RipperApplicationTest Somma.class 1 1 0 4
     - name: Generate Randoop tests with Emma
       run: java -noverify -classpath /home/runner/work/Somma-prova/Somma-prova/Prova/classes:/home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-3.0.6.jar randoop.main.Main gentests --classlist=Somma/src/lista.txt --timelimit=20 --junit-output-dir=Prova
     - name: Emma report
       run: |
             #!/bin/bash
-            cp coverage.ec Prova/coverage.ec
+            cp coverage.ec Prova/coverage_$timestamp.ec
             rm coverage.ec
-            timestamp="$(date +"%s")"
-            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -Dreport.html.out.file=/home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp.html  -in Prova/coverage.em,Prova/coverage.ec
+            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -Dreport.html.out.file=/home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp.html  -in Prova/coverage_$timestamp.em,Prova/coverage_$timestamp.ec
    # - name: Emma merge
     #  run: |
      #       if [ ls Prova/coverage.ec];
@@ -64,7 +65,6 @@ jobs:
             echo "Prova"
             ls Prova
             ls
-            #-e Prova/coverage.ec
 
     - name: Upload Emma reports
       uses: actions/upload-artifact@v2
