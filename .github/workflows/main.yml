@@ -11,10 +11,10 @@ jobs:
         # Set N number of parallel jobs you want to run tests on.
         # Use higher number if you have slow tests to split them on more parallel jobs.
         # Remember to update ci_node_index below to 0..N-1
-        ci_node_total: [2]
+        ci_node_total: [8]
         # set N-1 indexes for parallel jobs
         # When you run 2 parallel jobs then first job will have index 0, the second job will have index 1 etc
-        ci_node_index: [0, 1]
+        ci_node_index: [0, 1, 2, 3, 4, 5, 6, 7]
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -39,7 +39,7 @@ jobs:
       #run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m overwrite -d Prova -cp /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix Prova/coverage.txt -out Prova/coverage.em
       run: |
             java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d Prova -ip /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix @Somma/src/myfilters.txt -out Prova/coverage.em
-            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src:/home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/Somma/src/ripper.jar ripper.RipperApplicationTest Somma.class 1 1 0 4
+            #java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src:/home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/Somma/src/ripper.jar ripper.RipperApplicationTest Somma.class 1 1 0 4
     - name: Generate Randoop tests with Emma
       run: java -noverify -classpath /home/runner/work/Somma-prova/Somma-prova/Prova/classes:/home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-3.0.6.jar randoop.main.Main gentests --classlist=Somma/src/lista.txt --timelimit=20 --junit-output-dir=Prova
     - name: Emma report
