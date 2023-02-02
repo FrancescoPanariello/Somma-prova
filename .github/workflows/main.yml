@@ -39,6 +39,7 @@ jobs:
       #run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m overwrite -d Prova -cp /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix Prova/coverage.txt -out Prova/coverage.em
       run: |
             #!/bin/bash
+            echo "prova $ci_node_index -- $ci_node_index[] -- "
             timestamp="$(date +"%H_%M_%S")"
             
             #Instr emma
