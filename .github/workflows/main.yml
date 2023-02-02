@@ -18,11 +18,15 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-    - name: Set up JDK 19.0.1
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    #- name: Set up JDK 19.0.1
       #run: sudo apt-get update && sudo apt-get install -y openjdk-19-jdk
-      run: |
-            sudo apt-get install openjdk-8-jdk
-            java -version
+     # run: |
+      #      sudo apt-get install openjdk-8-jdk
+       #     java -version
             #sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0_version/bin/java
     - name: Compile Somma.java
       run: javac Somma/src/Somma.java
@@ -46,7 +50,6 @@ jobs:
     #  run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in Prova/coverage.em,Prova/coverage.ec -out Prova/coverage.es
     - name: Controllo
       run: |
-            ls Somma/usr/lib/jvm/
             ls Somma/src
             ls Prova
             ls Prova/classes
