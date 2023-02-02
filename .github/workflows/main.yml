@@ -47,7 +47,7 @@ jobs:
             #!/bin/bash
             cp coverage.ec Prova/coverage.ec
             rm coverage.ec
-            timestamp="$(date +"%T")"
+            timestamp="$(date +"%s")"
             java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -Dreport.html.out.file=/home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp.html  -in Prova/coverage.em,Prova/coverage.ec
    # - name: Emma merge
     #  run: |
