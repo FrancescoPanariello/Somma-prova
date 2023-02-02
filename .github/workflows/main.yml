@@ -44,7 +44,7 @@ jobs:
       run: java -noverify -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src:/home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-3.0.6.jar randoop.main.Main gentests --classlist=Somma/src/lista.txt --timelimit=20
     - name: Emma report
       run: |
-            cp Somma/coverage.ec Prova/coverage.ec
+            #cp Somma/coverage.ec Prova/coverage.ec
             java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -in Prova/coverage.em,Prova/coverage.ec
    # - name: Emma merge
     #  run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in Prova/coverage.em,Prova/coverage.ec -out Prova/coverage.es
