@@ -40,8 +40,8 @@ jobs:
       run: |
             #!/bin/bash
             echo "prova $ci_node_index -- $ci_node_index[] -- "
-            timestamp="$(date +"%H_%M_%S")"
-            
+            timestamp="$(date +"%H_%M_%S_%ms")"
+            echo "prova $timestamp"
             #Instr emma
             java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d Prova -ip /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix @Somma/src/myfilters.txt -out Prova/coverage_$timestamp.em
             
