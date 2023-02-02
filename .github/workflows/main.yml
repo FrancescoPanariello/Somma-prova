@@ -49,7 +49,7 @@ jobs:
             #java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -in Prova/coverage.em,Prova/coverage.ec
     - name: Emma merge
       run: |
-            if [[ -f "Prova/coverage.ec"]];
+            if [-f "Prova/coverage.ec"];
             then
               java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in  Prova/coverage.es, Prova/coverage.es -out Prova/coverageunion.es 
               java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -in Prova/coverageunion.ec
