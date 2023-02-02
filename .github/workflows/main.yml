@@ -73,4 +73,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Emma reports
-        path: /home/runner/work/Somma-prova/Somma-prova/coverage/
+        path: /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp/
