@@ -67,3 +67,10 @@ jobs:
       with:
         name: Emma reports
         path: /home/runner/work/Somma-prova/Somma-prova/coverage/*
+        
+  job:
+   runs-on: ubuntu-latest
+   steps:
+    - name: Prova
+      run: ls
+    
