@@ -3,7 +3,7 @@ name: Java Test Generation
 on: [push]
 
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -12,34 +12,36 @@ jobs:
         # Use higher number if you have slow tests to split them on more parallel jobs.
         # Remember to update ci_node_index below to 0..N-1
         ci_node_total: [8]
+        
         # set N-1 indexes for parallel jobs
         # When you run 2 parallel jobs then first job will have index 0, the second job will have index 1 etc
         ci_node_index: [0, 1, 2, 3, 4, 5, 6, 7]
+        
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    #- name: Set up JDK 19.0.1
-      #run: sudo apt-get update && sudo apt-get install -y openjdk-19-jdk
-     # run: |
-      #      sudo apt-get install openjdk-8-jdk
-       #     java -version
-            #sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0_version/bin/java
+
     - name: Compile Somma.java
       run: javac Somma/src/Somma.java
+      
     - name: Download Randoop
       run: wget https://github.com/randoop/randoop/releases/download/v3.0.6/randoop-all-3.0.6.jar -P Somma/src
+      
     - name: Unzip Emma
       run: unzip Somma/src/emma-2.0.5312.zip -d Somma/src
-    - name: Run emma e randoop
+      
+    - name: Run emma and randoop
       #run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m overwrite -d Prova -cp /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix Prova/coverage.txt -out Prova/coverage.em
       run: |
             #!/bin/bash
+            
             timestamp=${{ matrix.ci_node_index }}
-            echo "prova $timestamp"
+
             #Instr emma
             java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d Prova -ip /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix @Somma/src/myfilters.txt -out Prova/coverage_$timestamp.em
 
@@ -59,18 +61,23 @@ jobs:
             
             cp Prova/coverage_$timestamp.ec /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.ec
             cp Prova/coverage_$timestamp.em /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.em
+            
     - name: Upload Emma reports
       uses: actions/upload-artifact@v2
       with:
         name: Emma reports
         path: /home/runner/work/Somma-prova/Somma-prova/coverage/*
         
-  job:
-   needs: test
+        
+  #Job che si attiva al termine dei test
+  
+  merge:
+   needs: tests
    runs-on: ubuntu-latest
    steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -80,10 +87,13 @@ jobs:
       uses: actions/download-artifact@v3
       with:
        name: Emma reports
+       
     - name: Prova
       run: ls
+      
     - name: Unzip Emma
       run: unzip Somma/src/emma-2.0.5312.zip -d Somma/src
+      
     - name: Emma merge
       run: |
             #!/bin/bash
@@ -99,12 +109,15 @@ jobs:
                   count=$(($count+1))
               fi
             done
+            
             cp /home/runner/work/Somma-prova/Somma-prova/coverage_$((count))/coverage_$((count)).es /home/runner/work/Somma-prova/Somma-prova/coveragemerge.es
 
-            
             echo /home/runner/work/Somma-prova/Somma-prova/coverage_$((count))/coverage_$((count)).es
+            
             java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -Dreport.html.out.file=/home/runner/work/Somma-prova/Somma-prova/coveragemerge/coveragemerge.html  -in /home/runner/work/Somma-prova/Somma-prova/coveragemerge.es
+            
             cp /home/runner/work/Somma-prova/Somma-prova/coverage_$((count))/coverage_$((count)).es /home/runner/work/Somma-prova/Somma-prova/coveragemerge/coveragemerge.es
+            
     - name: Upload Emma reports
       uses: actions/upload-artifact@v2
       with:
