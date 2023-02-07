@@ -82,8 +82,8 @@ jobs:
     - name: Emma merge
       run: |
             #!/bin/bash
-            FILES='ls /home/runner/work/Somma-prova/Somma-prova/*/*.em'
-            FILES2='ls /home/runner/work/Somma-prova/Somma-prova/*/*.ec'
+            FILES=ls /home/runner/work/Somma-prova/Somma-prova/*/*.em
+            FILES2=ls /home/runner/work/Somma-prova/Somma-prova/*/*.ec
             java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in $FILES -out coverageunion.em
             java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in $FILES2 -out coverageunion.ec
             #count=0
