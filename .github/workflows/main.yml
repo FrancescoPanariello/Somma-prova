@@ -90,7 +90,7 @@ jobs:
     - name: Emma merge
       run: |
             #!/bin/bash
-            FILES= ./*
+            FILES= /*
             count=0
             for directory in FILES
             do
