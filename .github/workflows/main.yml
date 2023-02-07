@@ -98,11 +98,11 @@ jobs:
             cp /home/runner/work/Somma-prova/Somma-prova/coverage_$((count-1))/coverage_$((count-1)).em /home/runner/work/Somma-prova/Somma-prova/coveragemerge.em 
             cp /home/runner/work/Somma-prova/Somma-prova/coverage_$((count-1))/coverage_$((count-1)).ec /home/runner/work/Somma-prova/Somma-prova/coveragemerge.ec
             
-            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -Dreport.html.out.file=/home/runner/work/Somma-prova/Somma-prova/coveragemerge/coveragemerge.html  -in /home/runner/work/Somma-prova/Somma-prova/coveragemerge/coveragemerge.em ,/home/runner/work/Somma-prova/Somma-prova/coveragemerge/coveragemerge.ec
+            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -Dreport.html.out.file=/home/runner/work/Somma-prova/Somma-prova/coveragemerge/coveragemerge.html  -in /home/runner/work/Somma-prova/Somma-prova/coveragemerge.em ,/home/runner/work/Somma-prova/Somma-prova/coveragemerge.ec
     - name: Upload Emma reports
       uses: actions/upload-artifact@v2
       with:
         name: Coverage merge
-        path: /home/runner/work/Somma-prova/Somma-prova/coveragemerge/*
+        path: /home/runner/work/Somma-prova/Somma-prova/coveragemerge.?
      
     
