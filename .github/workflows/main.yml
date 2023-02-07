@@ -90,7 +90,7 @@ jobs:
     - name: Emma merge
       run: |
             #!/bin/bash
-            FILES= /home/runner/work/Somma-prova/Somma-prova/coverage_?/*
+            FILES= /home/runner/work/Somma-prova/Somma-prova/coverage_?/*.em
             count=0
             for directory in FILES
             do
