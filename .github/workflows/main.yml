@@ -82,19 +82,22 @@ jobs:
     - name: Emma merge
       run: |
             #!/bin/bash
-            #FILES= '/home/runner/work/Somma-prova/Somma-prova/coverage_?/*.em'
-            count=0
-            for file in /home/runner/work/Somma-prova/Somma-prova/coverage_?/*.em
-            do
-              count2=$(($count+1))
-              FILE=coverage_$count2/coverage_$count2.em
-              if test -f "$FILE"; then
-                  echo "$FILE exists."
-                  java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in coverage_$count/coverage_$count.em,coverage_$count2/coverage_$count2.em -out coverage_$count2/coverage_$count2.em
-                  java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in coverage_$count/coverage_$count.ec,coverage_$count2/coverage_$count2.ec -out coverage_$count2/coverage_$count2.ec
-                  count=$(($count+1))
-              fi
-            done
+            FILES= /home/runner/work/Somma-prova/Somma-prova/coverage_?/*.em
+            FILES2= /home/runner/work/Somma-prova/Somma-prova/coverage_?/*.ec
+            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in FILES -out coverageunion.em
+            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in FILES2 -out coverageunion.ec
+            #count=0
+            #cp /home/runner/work/Somma-prova/Somma-prova/coverage_$count/coverage_$count.em /home/runner/work/Somma-prova/Somma-prova/coverageunion.em
+            #for file in /home/runner/work/Somma-prova/Somma-prova/coverage_?/*.em
+            #do
+             # count2=$(($count+1))
+              #FILE=coverage_$count/coverage_$count.em
+              #if test -f "$FILE"; then
+               #   echo "$FILE exists."
+                #  java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in coverageunion.em,coverage_$count2/coverage_$count.em -out coverage_$count2/coverage_$count2.em
+                 # java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in coverageunion.ec,coverage_$count2/coverage_$count.ec -out coverage_$count2/coverage_$count2.ec
+              #fi
+            #done
             cp /home/runner/work/Somma-prova/Somma-prova/coverage_$((count))/coverage_$((count)).em /home/runner/work/Somma-prova/Somma-prova/coveragemerge.em 
             cp /home/runner/work/Somma-prova/Somma-prova/coverage_$((count))/coverage_$((count)).ec /home/runner/work/Somma-prova/Somma-prova/coveragemerge.ec
             
