@@ -96,6 +96,7 @@ jobs:
               if test -f "$FILE"; then
                   echo "$FILE exists."
                   java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in coverage_$count/coverage_$count.es,coverage_$count2/coverage_$count2.es -out coverage_$count2/coverage_$count2.es
+                  count=$(($count+1))
               fi
             done
             cp /home/runner/work/Somma-prova/Somma-prova/coverage_$((count))/coverage_$((count)).es /home/runner/work/Somma-prova/Somma-prova/coveragemerge.es
