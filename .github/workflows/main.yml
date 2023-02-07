@@ -96,7 +96,7 @@ jobs:
             do
               count2=$(($count+1))
               java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in coverage_$count/coverage_$count.em,coverage_$count2/coverage_$count2.em -out coverage_$count2/coverage_$count2.em
-              count= $(($count+1))
+              (($count++))
             done
             
      
