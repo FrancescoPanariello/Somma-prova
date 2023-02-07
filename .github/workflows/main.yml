@@ -69,6 +69,7 @@ jobs:
         path: /home/runner/work/Somma-prova/Somma-prova/coverage/*
         
   job:
+   needs: test
    runs-on: ubuntu-latest
    steps:
     - name: Prova
