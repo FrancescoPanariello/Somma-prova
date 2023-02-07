@@ -94,9 +94,9 @@ jobs:
             count=0
             for file in /home/runner/work/Somma-prova/Somma-prova/coverage_?/*.em
             do
-              count2=count+1
+              count2=$count+1
               java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in coverage_$count/coverage_$count.em,coverage_$count/coverage_$count2.em -out coverage_$count/coverage_$count2.em
-              count= count + 1
+              count= $count + 1
             done
             
      
