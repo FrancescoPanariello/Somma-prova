@@ -90,9 +90,9 @@ jobs:
     - name: Emma merge
       run: |
             #!/bin/bash
-            FILES= /home/runner/work/Somma-prova/Somma-prova/coverage_?/*.em
+            FILES= '/home/runner/work/Somma-prova/Somma-prova/coverage_?/*.em'
             count=0
-            for directory in FILES
+            for file in FILES
             do
               java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in coverage_$count/coverage_$count.em,coverage_$count/coverage_$(count + 1).em -out coverage_$count/coverage_$(count + 1).em
               count= count + 1
