@@ -52,6 +52,11 @@ jobs:
             #Emma report
             java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -Dreport.html.out.file=/home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.html  -in Prova/coverage_$timestamp.em,Prova/coverage_$timestamp.ec
             
+            
+            #Emma merge .em e .ec
+            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in  Prova/coverage_$timestamp.em,Prova/coverage_$timestamp.ec -out /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.es
+            
+            
             cp Prova/coverage_$timestamp.ec /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.ec
             cp Prova/coverage_$timestamp.em /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.em
     - name: Upload Emma reports
@@ -82,31 +87,26 @@ jobs:
     - name: Emma merge
       run: |
             #!/bin/bash
-            FILES=ls /home/runner/work/Somma-prova/Somma-prova/*/*.em
-            FILES2=ls /home/runner/work/Somma-prova/Somma-prova/*/*.ec
-            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in $FILES -out coverageunion.em
-            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in $FILES2 -out coverageunion.ec
-            #count=0
-            #cp /home/runner/work/Somma-prova/Somma-prova/coverage_$count/coverage_$count.em /home/runner/work/Somma-prova/Somma-prova/coverageunion.em
-            #for file in /home/runner/work/Somma-prova/Somma-prova/coverage_?/*.em
-            #do
-             # count2=$(($count+1))
-              #FILE=coverage_$count/coverage_$count.em
-              #if test -f "$FILE"; then
-               #   echo "$FILE exists."
-                #  java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in coverageunion.em,coverage_$count2/coverage_$count.em -out coverage_$count2/coverage_$count2.em
-                 # java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in coverageunion.ec,coverage_$count2/coverage_$count.ec -out coverage_$count2/coverage_$count2.ec
-              #fi
-            #done
-            cp /home/runner/work/Somma-prova/Somma-prova/coverage_$((count))/coverage_$((count)).em /home/runner/work/Somma-prova/Somma-prova/coveragemerge.em 
-            cp /home/runner/work/Somma-prova/Somma-prova/coverage_$((count))/coverage_$((count)).ec /home/runner/work/Somma-prova/Somma-prova/coveragemerge.ec
+
+            count=0
+            for file in /home/runner/work/Somma-prova/Somma-prova/coverage_?/*.es
+            do
+             count2=$(($count+1))
+             FILE=coverage_$count2/coverage_$count2.es
+              if test -f "$FILE"; then
+                  echo "$FILE exists."
+                  java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in coverage_$count/coverage_$count.es,coverage_$count2/coverage_$count.es -out coverage_$count2/coverage_$count2.es
+              fi
+            done
+            cp /home/runner/work/Somma-prova/Somma-prova/coverage_$((count))/coverage_$((count)).es /home/runner/work/Somma-prova/Somma-prova/coveragemerge.es
+
             
-            echo /home/runner/work/Somma-prova/Somma-prova/coverage_$((count))/coverage_$((count)).ec
-            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -Dreport.html.out.file=/home/runner/work/Somma-prova/Somma-prova/coveragemerge/coveragemerge.html  -in /home/runner/work/Somma-prova/Somma-prova/coveragemerge.em ,/home/runner/work/Somma-prova/Somma-prova/coveragemerge.ec
+            echo /home/runner/work/Somma-prova/Somma-prova/coverage_$((count))/coverage_$((count)).es
+            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -Dreport.html.out.file=/home/runner/work/Somma-prova/Somma-prova/coveragemerge/coveragemerge.html  -in /home/runner/work/Somma-prova/Somma-prova/coveragemerge.es
     - name: Upload Emma reports
       uses: actions/upload-artifact@v2
       with:
         name: Coverage merge
-        path: /home/runner/work/Somma-prova/Somma-prova/coveragemerge.?
+        path: /home/runner/work/Somma-prova/Somma-prova/*
      
     
