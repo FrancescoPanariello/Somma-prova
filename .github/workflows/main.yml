@@ -26,8 +26,8 @@ jobs:
       with:
         java-version: 1.8
 
-    - name: Compile Somma.java
-      run: javac Somma/src/Somma.java
+    #- name: Compile Somma.java
+      #run: javac Somma/src/Somma.java
       
     - name: Download Randoop
       run: wget https://github.com/randoop/randoop/releases/download/v3.0.6/randoop-all-3.0.6.jar -P /home/runner/work/Somma-prova/Somma-prova
@@ -44,7 +44,7 @@ jobs:
 
             #Instr emma
             #java -classpath /home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp -ip /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix @Somma/src/myfilters.txt -out coverage_$timestamp/coverage_$timestamp.em
-            java -classpath /home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp -ip /home/runner/work/Somma-prova/Somma-prova/Somma/src -out coverage_$timestamp/coverage_$timestamp.em
+            java -classpath /home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp -ip /home/runner/work/Somma-prova/Somma-prova/jars/jipa.jar -out coverage_$timestamp/coverage_$timestamp.em
 
             #Randoop
             java -noverify -classpath /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp/classes:/home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/randoop-all-3.0.6.jar randoop.main.Main gentests --classlist=/home/runner/work/Somma-prova/Somma-prova/lista.txt --timelimit=20 --no-regression-tests=true --junit-output-dir=/home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp
