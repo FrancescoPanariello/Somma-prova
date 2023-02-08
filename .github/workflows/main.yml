@@ -62,7 +62,7 @@ jobs:
             #cp Prova/coverage_$timestamp.ec /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.ec
             #cp Prova/coverage_$timestamp.em /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.em
     - name: Controll9o
-      run: ls /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp
+      run: ls /home/runner/work/Somma-prova/Somma-prova/coverage_?
     - name: Upload Emma reports
       uses: actions/upload-artifact@v2
       with:
