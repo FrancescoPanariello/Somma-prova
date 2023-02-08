@@ -30,43 +30,43 @@ jobs:
       run: javac Somma/src/Somma.java
       
     - name: Download Randoop
-      run: wget https://github.com/randoop/randoop/releases/download/v3.0.6/randoop-all-3.0.6.jar -P Somma/src
+      run: wget https://github.com/randoop/randoop/releases/download/v3.0.6/randoop-all-3.0.6.jar -P /home/runner/work/Somma-prova/Somma-prova
       
     - name: Unzip Emma
-      run: unzip Somma/src/emma-2.0.5312.zip -d Somma/src
+      run: unzip Somma/src/emma-2.0.5312.zip -d /home/runner/work/Somma-prova/Somma-prova
       
     - name: Run emma and randoop
-      #run: java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m overwrite -d Prova -cp /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix Prova/coverage.txt -out Prova/coverage.em
       run: |
             #!/bin/bash
             
             timestamp=${{ matrix.ci_node_index }}
+            mkdir /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp
 
             #Instr emma
-            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d Prova -ip /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix @Somma/src/myfilters.txt -out Prova/coverage_$timestamp.em
+            java -classpath /home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d Prova -ip /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix @Somma/src/myfilters.txt -out coverage_$timestamp/coverage_$timestamp.em
 
             #Randoop
-            java -noverify -classpath /home/runner/work/Somma-prova/Somma-prova/Prova/classes:/home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/Somma/src/randoop-all-3.0.6.jar randoop.main.Main gentests --classlist=Somma/src/lista.txt --timelimit=20 --junit-output-dir=Prova
+            java -noverify -classpath /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp/classes:/home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/randoop-all-3.0.6.jar randoop.main.Main gentests --classlist=Somma/src/lista.txt --timelimit=20 --junit-output-dir=/home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp
 
-            cp coverage.ec Prova/coverage_$timestamp.ec
+            cp coverage.ec /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp/coverage_$timestamp.ec
             rm coverage.ec
 
             #Emma report
-            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -Dreport.html.out.file=/home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.html  -in Prova/coverage_$timestamp.em,Prova/coverage_$timestamp.ec
+            java -classpath /home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312/lib/emma.jar emma report -r html  -Dreport.html.out.file=/home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp/coverage_$timestamp.html  -in /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp/coverage_$timestamp.em,/home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp/coverage_$timestamp.ec
             
             
             #Emma merge .em e .ec
-            java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in  Prova/coverage_$timestamp.em,Prova/coverage_$timestamp.ec -out /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.es
+            java -classpath /home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312/lib/emma.jar emma merge -in  /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp/coverage_$timestamp.em,/home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp/coverage_$timestamp.ec -out /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp/coverage_$timestamp.es
             
             
-            cp Prova/coverage_$timestamp.ec /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.ec
-            cp Prova/coverage_$timestamp.em /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.em
+            #cp Prova/coverage_$timestamp.ec /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.ec
+            #cp Prova/coverage_$timestamp.em /home/runner/work/Somma-prova/Somma-prova/coverage/coverage_$timestamp/coverage_$timestamp.em
             
     - name: Upload Emma reports
       uses: actions/upload-artifact@v2
       with:
         name: Emma reports
-        path: /home/runner/work/Somma-prova/Somma-prova/coverage/*
+        path: /home/runner/work/Somma-prova/Somma-prova/coverage_?/*
         
         
   #Job che si attiva al termine dei test
