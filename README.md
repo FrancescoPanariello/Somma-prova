@@ -6,9 +6,9 @@ GitHub Actions per testare in parallelo randomicamente classi java utilizzando r
 ## Utilizzo
 
 - Clona la repository
-- Carica il progetto nella repository clonata
+- Carica il file .jar nella repository clonata all' interno della directory "jars"
 - Modifica il file "lista.txt" inserendo il nome delle classi da testare
-- Modifica lo script main.yml inserendo appositamente il nome del progetto da testare 
+- Modifica lo script main.yml inserendo appositamente il nome del progetto da testare in Emma instr e in Randoop
 
 ## Output
 
