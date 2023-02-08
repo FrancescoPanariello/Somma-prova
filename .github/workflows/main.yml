@@ -33,7 +33,7 @@ jobs:
       run: wget https://github.com/randoop/randoop/releases/download/v3.0.6/randoop-all-3.0.6.jar -P /home/runner/work/Somma-prova/Somma-prova
       
     - name: Unzip Emma
-      run: unzip Somma/src/emma-2.0.5312.zip -d /home/runner/work/Somma-prova/Somma-prova
+      run: unzip /home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312.zip -d /home/runner/work/Somma-prova/Somma-prova
       
     - name: Run emma and randoop
       run: |
@@ -43,10 +43,11 @@ jobs:
             mkdir /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp
 
             #Instr emma
-            java -classpath /home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp -ip /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix @Somma/src/myfilters.txt -out coverage_$timestamp/coverage_$timestamp.em
+            #java -classpath /home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp -ip /home/runner/work/Somma-prova/Somma-prova/Somma/src -ix @Somma/src/myfilters.txt -out coverage_$timestamp/coverage_$timestamp.em
+            java -classpath /home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312/lib/emma.jar emma instr -m fullcopy -d /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp -ip /home/runner/work/Somma-prova/Somma-prova/Somma/src -out coverage_$timestamp/coverage_$timestamp.em
 
             #Randoop
-            java -noverify -classpath /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp/classes:/home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/randoop-all-3.0.6.jar randoop.main.Main gentests --classlist=Somma/src/lista.txt --timelimit=20 --no-regression-tests=true --junit-output-dir=/home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp
+            java -noverify -classpath /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp/classes:/home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312/lib/emma.jar:/home/runner/work/Somma-prova/Somma-prova/randoop-all-3.0.6.jar randoop.main.Main gentests --classlist=/home/runner/work/Somma-prova/Somma-prova/lista.txt --timelimit=20 --no-regression-tests=true --junit-output-dir=/home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp
 
             cp coverage.ec /home/runner/work/Somma-prova/Somma-prova/coverage_$timestamp/coverage_$timestamp.ec
             rm coverage.ec
