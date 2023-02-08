@@ -1,6 +1,0 @@
--com.vladium.*
--org.apache.*
--org.fest.*
--org.junit.*
--junit.*
-
