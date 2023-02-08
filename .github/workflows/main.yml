@@ -90,7 +90,7 @@ jobs:
       run: ls
       
     - name: Unzip Emma
-      run: unzip Somma/src/emma-2.0.5312.zip -d Somma/src
+      run: unzip /home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312.zip -d /home/runner/work/Somma-prova/Somma-prova
       
     - name: Emma merge
       run: |
@@ -103,14 +103,14 @@ jobs:
              FILE=coverage_$count2/coverage_$count2.es
               if test -f "$FILE"; then
                   echo "$FILE exists."
-                  java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma merge -in coverage_$count/coverage_$count.es,coverage_$count2/coverage_$count2.es -out coverage_$count2/coverage_$count2.es
+                  java -classpath /home/runner/work/Somma-prova/Somma-prova/emma-2.0.5312/lib/emma.jar emma merge -in coverage_$count/coverage_$count.es,coverage_$count2/coverage_$count2.es -out coverage_$count2/coverage_$count2.es
                   count=$(($count+1))
               fi
             done
             
             cp /home/runner/work/Somma-prova/Somma-prova/coverage_$((count))/coverage_$((count)).es /home/runner/work/Somma-prova/Somma-prova/coveragemerge.es
 
-            echo /home/runner/work/Somma-prova/Somma-prova/coverage_$((count))/coverage_$((count)).es
+ 
             
             java -classpath /home/runner/work/Somma-prova/Somma-prova/Somma/src/emma-2.0.5312/lib/emma.jar emma report -r html  -Dreport.html.out.file=/home/runner/work/Somma-prova/Somma-prova/coveragemerge/coveragemerge.html  -in /home/runner/work/Somma-prova/Somma-prova/coveragemerge.es
             
